@@ -1,0 +1,23 @@
+<?php
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = $_POST["name"];
+  $phone = $_POST["phone"];
+  $message = $_POST["message"];
+  
+  $to = "info@MAIL.com"; // Replace with your desired email address
+  $subject = "New Call Back Request - Elite Hmc";
+  $body = "From: " . $name ."\n\nPhone: " . $phone."\n\n Message:".$message;
+  $headers = "From: " . $name . " < website@mail.com >\r\n";
+  if (mail($to, $subject, $body, $headers)) {
+    $_SESSION["reply"]  = "Message sent successfully.";
+    header("Location: index.php?mail=success#cta");
+  } else {
+    $_SESSION["reply"]  = "Message could not be sent.";
+ 
+  }
+}
+
+?>
